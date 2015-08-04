@@ -3,6 +3,7 @@ var express=require('express'),
     bodyParser=require('body-parser'),
     morgan=require('morgan'),
     mongoose=require('mongoose'),
+    User=require('./app/models/user'),
     port=process.env.port || 3000;
 // BASE SETUP
 app.use(bodyParser.urlencoded({extended:true}));
@@ -16,12 +17,10 @@ app.use(function(req,res, next){
     next();
 });
 app.use(morgan('dev'));
-var mongoose = require('mongoose');
 
-var db = mongoose.createConnection(
-    'mongodb://naveedjb:12345@jello.modulusmongo.net:27017/uX7abemy'
-);
-var User=require('./app/models/user');
+
+ mongoose.connect('mongodb://naveed:11111@ds029793.mongolab.com:29793/crm');
+
 // SETUP FOR ROUTES
 //basic route for the home page
 app.get('/',function(req,res){
@@ -54,7 +53,61 @@ apiRouter.route('/users').post(function(req,res){
              res.json({ message: 'User created!' });
 
     });
+}).get(function(req,res){
+    User.find(function(err,users){
+
+        if(err)
+            res.send(err);
+
+        res.json(users);
+    })
+
+
 })
+
+apiRouter.route('/users/:user_id').get(function(req,res){
+
+
+    User.findById(req.params.user_id,function(err,user){
+        if(err)
+            res.send(err)
+
+        res.json(user);
+    })
+
+})
+.put(function(req,res){
+
+        User.findById(req.params.user_id,function(err,user){
+            if(err)
+                res.send(err);
+            if(req.body.name) user.name=req.body.name;
+            if(req.body.username) user.username=req.body.username;
+            if(req.body.password) user.password=req.body.password;
+
+            user.save(function(err){
+                if (err) {
+                    res.send(err);
+                }
+                res.json({ message: 'User updated!' });
+
+            });
+        })
+
+    })
+.delete(function(req,res){
+
+        User.remove({_id:req.params.user_id},function(err,user){
+
+            if(err) res.send(err);
+
+            res.json({message: 'Successfully deleted'});
+
+        })
+
+
+    })
+
 app.use('/api',apiRouter);
 
 app.listen(port);

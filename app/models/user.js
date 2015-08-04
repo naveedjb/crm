@@ -19,7 +19,7 @@ UserSchema.pre('save',function(next){
 
     //hash the password, if new or password change
 
-    if(user.isModified('password'))
+    if(!user.isModified('password'))
     {
         return next()
     }
@@ -27,7 +27,7 @@ UserSchema.pre('save',function(next){
     bcrypt.hash(user.password,null,null,function(err,hash){
 
         if(err)
-            next(err)
+           next(err)
 
         user.password=hash;
         next();
