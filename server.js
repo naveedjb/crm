@@ -4,7 +4,9 @@ var express=require('express'),
     morgan=require('morgan'),
     mongoose=require('mongoose'),
     User=require('./app/models/user'),
-    port=process.env.port || 3000;
+    port=process.env.port || 3000,
+    jwt=require('jsonwebtoken'),
+    superSecret='ilovedarkbrownchocolate';
 // BASE SETUP
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -30,10 +32,96 @@ app.get('/',function(req,res){
 //test route to the apinode
 var apiRouter=express.Router();
 
+
+apiRouter.route('/authenticate').post(function(req,res){
+
+ User.findOne({
+
+     username: req.body.username}).select('name username password').exec(function(err,user){
+
+     if(err) throw err
+
+     if(!user){
+
+         res.json({
+             success:false,
+             message: 'Authentication failed, User not found'
+         })
+     }else if(user)
+     {
+         var validPassword=user.comparePassword(req.body.password);
+
+         if(!validPassword){
+
+             res.json({
+                 success: false,
+                 message: 'Authentication Failed, Wrong Password'
+             })
+         }
+         else {
+             var token = jwt.sign({
+                 name: user.name,
+                 username: user.username
+             },
+             superSecret,
+                 {
+                     expiresInMinutes: 1440
+                 }
+             )
+
+            res.json({
+                success: true,
+                message: 'Enjoy your token',
+                token: token
+            })
+         }
+
+     }
+
+
+ })
+
+});
+
+apiRouter.use(function(req,res,next){
+    var token=req.token || req.param('token') || req.headers['x-access-token'];
+
+    if(token){
+        jwt.verify(token,superSecret,function(err,decoded){
+            if(err){
+                res.status(403).send({
+                    success:false,
+                    message: 'Token authentication failed'
+
+                })
+
+            }
+            else{
+                req.decoded=decoded;
+                next();
+
+
+            }
+
+
+        })
+
+    }else
+    {
+        res.status(403).send({
+            success:false,
+            message: 'No token provided'
+
+        })
+
+    }
+
+
+});
+
 apiRouter.get('/',function(req,res){
     res.json({message:"hooray! welcome to our api"});
 });
-//
 
 apiRouter.route('/users').post(function(req,res){
 
@@ -108,6 +196,12 @@ apiRouter.route('/users/:user_id').get(function(req,res){
 
     })
 
+
+apiRouter.get('/me',function(req,res){
+    res.send(req.decoded);
+
+
+})
 app.use('/api',apiRouter);
 
 app.listen(port);
