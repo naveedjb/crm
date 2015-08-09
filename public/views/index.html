@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css">
+    <base href="/"/>
+</head>
+<body class="container" ng-app="firstApp" ng-controller="mainController as main">
+<header>
+     <nav class="navbar navbar-default">
+     <div class="navbar-header">
+     <a class="navbar-brand" href="/">Angular Routing Example</a>
+     </div>
+
+     <ul class="nav navbar-nav navbar-right">
+     <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+     <li><a href="/about"><i class="fa fa-shield"></i> About</a></li>
+     <li><a href="/contact"><i class="fa fa-comment"></i> Contact</a></li>
+     </ul>
+     </nav>
+     </header>
+
+<main>
+
+
+
+
+    <div ng-view></div>
+</main>
+
+<!--<div class="jumbotron">
+    <h2>This is my Message</h2>
+    {{main.message}}
+</div>
+<div class="form-group">
+    <label for=""> Message</label>
+    <input type="text" ng-model="main.message" class="form-control"/>
+</div>
+
+
+<table class="table table-bordered">
+    <thead>
+    <td>name</td>
+    <td>model</td>
+    <td>nerd level</td>
+    </thead>
+<tbody>
+<tr ng-repeat="computer in main.computers">
+    <td>{{computer.name}}</td>
+<td>{{computer.color}}</td>
+<td>{{computer.nerdness}}</td>
+</tr>
+
+
+
+</tbody>
+
+
+</table>
+<form class="form-inline" ng-submit="main.addComputer()">
+     <input type="text" class="form-control" placeholder="Macbook" ng-model="main.computerData.name">
+     <input type="text" class="form-control" placeholder="Silver" ng-model="main.computerData.color">
+     <input type="number" class="form-control" placeholder="8" ng-model="main.computerData.nerdness">
+
+     <button type="submit" class="btn btn-success">Add</button>
+     </form>-->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.0/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.0/angular-route.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/app-routes.js"></script>
+</body>
+</html>

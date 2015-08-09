@@ -6,7 +6,9 @@ var express=require('express'),
     User=require('./app/models/user'),
     port=process.env.port || 3000,
     jwt=require('jsonwebtoken'),
-    superSecret='ilovedarkbrownchocolate';
+    superSecret='ilovedarkbrownchocolate',
+    path=require('path');
+    ;
 // BASE SETUP
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -19,6 +21,10 @@ app.use(function(req,res, next){
     next();
 });
 app.use(morgan('dev'));
+app.use(express.static(__dirname+'/public'))
+app.get('*',function(req,res){
+    res.sendFile(path.join(__dirname + '/public/views/index.html'));
+});
 
 
  mongoose.connect('mongodb://naveed:11111@ds029793.mongolab.com:29793/crm');
