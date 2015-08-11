@@ -2,7 +2,7 @@
  * Created by naveed on 8/9/2015.
  */
 
-angular.module('firstApp',['routerRoutes'])
+angular.module('firstApp',['routerRoutes','ngAnimate'])
     .config(function($routeProvider,$locationProvider){
         $routeProvider
             .when('/home',{
