@@ -42,7 +42,7 @@ var apiRouter=express.Router();
                         {
                             expiresInMinutes: 1440
                         }
-                    )
+                    );
 
                     res.json({
                         success: true,

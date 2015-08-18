@@ -5,20 +5,30 @@ angular.module('routerRoutes',['ngRoute'])
     .config(function($routeProvider,$locationProvider){
         $routeProvider
             .when('/',{
-                templateUrl:'views/pages/home.html',
-                controller:'homeController',
-                controllerAs:'home'
+                templateUrl:'app/views/pages/home.html'
+               /* controller:'homeController',
+                controllerAs:'home'*/
             })
-            .when('/about',{
-                templateUrl:'views/pages/about.html',
-                controller:'aboutController',
-                controllerAs:'about'
+            .when('/login',{
+                templateUrl:'app/views/pages/login.html',
+                 controller:'mainCtrl',
+                 controllerAs:'login'
             })
-            .when('/contact',{
-                templateUrl:'views/pages/contact.html',
-                controller:'contactController',
-                controllerAs:'contact'
+            .when('/users',{
+                templateUrl:'app/views/pages/all.html',
+                controller:'userCtrl',
+                controllerAs:'user'
             })
+            .when('/users/create',{
+                templateUrl:'app/views/pages/single.html',
+                controller:'userCreateCtrl',
+                controllerAs:'users'
+            })
+            .when('/users/:user_id',{
+                templateUrl:'app/views/pages/single.html',
+                controller:'userEditCtrl',
+                controllerAs:'users'
+            });
         $locationProvider.html5Mode(true);
 
-    })
+    });

@@ -1,28 +1,54 @@
-<!DOCTYPE html>
+
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/animate.c15 ss/3.1.1/animate.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
     <base href="/"/>
 </head>
-<body class="container" ng-app="firstApp" ng-controller="mainController as main">
+<body class="container" ng-app="firstApp" ng-controller="mainCtrl as main">
 <header>
-     <nav class="navbar navbar-default">
+    <div class="navbar navbar-inverse" ng-if="main.loggedIn">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-fire text-danger"></span> User CRM</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/users"><span class="glyphicon glyphicon-user"></span> Users</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
+                <li ng-if="main.loggedIn" class="navbar-text">Hello {{ main.user.username }}!</li>
+                <li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<!--<header>
+    <h1>Hello</h1>
+     <div class="navbar navbar-inverse" ng-if="main.loggedIn">
+     <div class="container">
      <div class="navbar-header">
-     <a class="navbar-brand" href="/">Angular Routing Example</a>
+     <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-fire text-danger"></span>
+         User CRM</a>
      </div>
 
-     <ul class="nav navbar-nav navbar-right">
-     <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
-     <li><a href="/about"><i class="fa fa-shield"></i> About</a></li>
-     <li><a href="/contact"><i class="fa fa-comment"></i> Contact</a></li>
+     <ul class="nav navbar-nav ">
+     <li><a href="/"><span class="glyphicon glyphicon-user"></span> Users</a></li>
      </ul>
-     </nav>
-     </header>
+
+         <ul class="nav navbar-nav navbar-right">
+            <li ng-if="!main.LoggedIn"><a href=""></a></li>
+             <li ng-if="!main.LoggedIn" class="navbar-text">Hello{{main.user.name}}</li>
+            <li ng-if="!main.LoggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
+         </ul>
+
+     </div>
+     </div>
+     </header>-->
 
 <main>
 
@@ -35,46 +61,16 @@
 
 </main>
 
-<!--<div class="jumbotron">
-    <h2>This is my Message</h2>
-    {{main.message}}
-</div>
-<div class="form-group">
-    <label for=""> Message</label>
-    <input type="text" ng-model="main.message" class="form-control"/>
-</div>
 
-
-<table class="table table-bordered">
-    <thead>
-    <td>name</td>
-    <td>model</td>
-    <td>nerd level</td>
-    </thead>
-<tbody>
-<tr ng-repeat="computer in main.computers">
-    <td>{{computer.name}}</td>
-<td>{{computer.color}}</td>
-<td>{{computer.nerdness}}</td>
-</tr>
-
-
-
-</tbody>
-
-
-</table>
-<form class="form-inline" ng-submit="main.addComputer()">
-     <input type="text" class="form-control" placeholder="Macbook" ng-model="main.computerData.name">
-     <input type="text" class="form-control" placeholder="Silver" ng-model="main.computerData.color">
-     <input type="number" class="form-control" placeholder="8" ng-model="main.computerData.nerdness">
-
-     <button type="submit" class="btn btn-success">Add</button>
-     </form>-->
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.0/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.0/angular-route.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.0/angular-animate.js"></script>
-<script src="../app.js"></script>
-<script src="../app-routes.js"></script>
+<script src="app/services/authService.js"></script>
+<script src="app/services/userService.js"></script>
+<script src="app/app-routes.js"></script>
+<script src="app/app.js"></script>
+
+<script src="app/controllers/mainCtrl.js"></script>
+<script src="app/controllers/userCtrl.js"></script>
 </body>
 </html>

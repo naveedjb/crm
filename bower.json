@@ -1,0 +1,22 @@
+{
+  "name": "crm",
+  "version": "0.0.0",
+  "homepage": "https://github.com/naveedjb/crm",
+  "authors": [
+    "naveed <naveedjb@hotmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.4",
+    "angular-route": "~1.4.4",
+    "angular-animate": "~1.4.4"
+  }
+}

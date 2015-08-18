@@ -1,0 +1,66 @@
+@sizesm:zoomIn 0.3s both ease;
+@sizelg:zoomInDown 1.2s both ease-in;
+@sizemd:zoomOutDown 0.5s both ease-in;
+@animate:spin 1s infinite;
+@deg0:rotate(0deg);
+@deg360:rotate(360deg);
+
+
+body {
+  padding-top: 50px;
+
+}
+
+#content-view {
+  position: relative;
+
+}
+.show-hide-message.ng-hide-remove {
+  animation:@sizesm;
+}
+.ng-enter .ng-leave {
+  width: 100%;
+  position: absolute;
+}
+
+.ng-enter {
+  -webkit-animation:@sizelg;
+  -moz-animation:@sizelg;
+  animation:@sizelg;
+}
+.ng-leave {
+  -webkit-animation:@sizemd;
+  -moz-animation:@sizemd;
+  animation:@sizemd;
+}
+
+main {
+
+  padding-top:30px;
+}
+
+header .nav {
+
+  border-radius:0;
+}
+
+.spinner {
+  -webkit-animation:@animate;
+  -moz-animation:@animate;
+  animation:@animate;
+}
+
+@keyframes spin {
+  from 	{ transform:@deg0; }
+  to 	{ transform:@deg360; }
+}
+
+@-webkit-keyframes spin {
+  from 	{ -webkit-transform:@deg0; }
+  to 	{ -webkit-transform:@deg360; }
+}
+
+@-moz-keyframes spin {
+  from 	{ -moz-transform:@deg0; }
+  to 	{ -moz-transform:@deg360; }
+}

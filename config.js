@@ -3,7 +3,7 @@
  */
 
 module.exports={
-    'port': process.env.PORT || 8080,
+    'port': process.env.PORT || 3000,
     'database': 'mongodb://naveed:11111@ds029793.mongolab.com:29793/crm',
     'secret':'ilovedarkbrownchocolate'
 }
